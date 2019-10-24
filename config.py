@@ -4,7 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     SECRET_KEY = os.environ.get("SECRET_KEY") or "ahrUr.bA@c-QfF7ZNWK*"
-    # SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     # MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.mailgun.org')
     # MAIL_DEFAULT_SENDER = 'Conscious Psychology<noreply@burgercraft.org>'
     # MAIL_PASSWORD = '1318cd4cfd3977951446f2fdaa2b8322-4a62b8e8-b5ac6f25'
