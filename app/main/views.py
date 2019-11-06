@@ -14,7 +14,7 @@ def index():
     if form.validate_on_submit():
         url = Url.query.filter_by(url=form.url.data).first()
         if url is None:
-            url = Url(url=form.url.data.strip("/"), short_url=random_string())
+            url = Url(url=form.url.data.strip("/"), short_url=_random_string())
             db.session.add(url)
             db.session.commit()
             shortened_url = url_for('.short_url', short_id=url.short_url, _external=True)
@@ -31,6 +31,6 @@ def short_url(short_id):
     return redirect(url.url)
 
 
-def random_string(string_length=10):
+def _random_string(string_length=10):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(string_length))
