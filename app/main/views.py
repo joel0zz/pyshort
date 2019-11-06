@@ -14,12 +14,14 @@ def index():
     if form.validate_on_submit():
         url = Url.query.filter_by(url=form.url.data).first()
         if url is None:
-            url = Url(url=form.url.data, short_url=random_string())
+            url = Url(url=form.url.data.strip("/"), short_url=random_string())
             db.session.add(url)
             db.session.commit()
-            flash('thanks for submitting the url', 'success')
+            shortened_url = url_for('.short_url', short_id=url.short_url, _external=True)
+            flash(f'Here is your shortened url: {shortened_url}', 'success')
             return redirect(url_for('main.index'))
-        print(url.short_url)
+        shortened_url = url_for('.short_url', short_id=url.short_url, _external=True)
+        flash(f'Here is your shortened url: {shortened_url}', 'success')
     return render_template('main/index.html', form=form)
 
 
