@@ -210,4 +210,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+data-dev.sqlite
+
 # End of https://www.gitignore.io/api/python,pycharm
