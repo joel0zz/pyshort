@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #007bff;
+  background-color: #b26365;
 }
 .navbar .navbar-brand {
   color: #ffffff;
@@ -140,3 +140,12 @@
   color: #288290;
   background-color: #f2f2f2;
 }
+
+/* primary button */
+    .btn-primary {
+        background-color: #b26365;
+        color: #ffffff;
+        border-color: #b26365;
+        border-radius: 25px;
+
+    }

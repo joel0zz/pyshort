@@ -1,4 +1,4 @@
-from flask import request, render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for
 import random
 import string
 
@@ -17,20 +17,24 @@ def index():
             url = Url(url=form.url.data.strip("/"), short_url=_random_string())
             db.session.add(url)
             db.session.commit()
-            shortened_url = url_for('.short_url', short_id=url.short_url, _external=True)
-            flash(f'Here is your shortened url: {shortened_url}', 'success')
+            flash(f'Here is your shortened url: {_url_generator(url)}', 'success')
             return redirect(url_for('main.index'))
-        shortened_url = url_for('.short_url', short_id=url.short_url, _external=True)
-        flash(f'Here is your shortened url: {shortened_url}', 'success')
+        flash(f'Here is your shortened url: {_url_generator(url)}', 'success')
     return render_template('main/index.html', form=form)
 
 
 @main.route('/<short_id>', methods=['GET', 'POST'])
 def short_url(short_id):
-    url = Url.query.filter_by(short_url=short_id).first()
-    return redirect(url.url)
+    try:
+        url = Url.query.filter_by(short_url=short_id).first()
+        return redirect(url.url)
+    except AttributeError:  # handle when index is loaded without <short_id> e.g first page load.
+        pass
 
 
 def _random_string(string_length=10):
-    letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for i in range(string_length))
+    return ''.join(random.choice(string.ascii_lowercase) for i in range(string_length))
+
+
+def _url_generator(url):
+    return url_for('.short_url', short_id=url.short_url, _external=True)

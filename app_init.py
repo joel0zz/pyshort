@@ -11,10 +11,6 @@ migrate = Migrate(app, db)
 def make_shell_context():
     return dict(db=db)
 
-
-if __name__ == '__main__':
-    app.run()
-
 # flask db init
 # flask db migrate -m ""
 # flask db upgrade

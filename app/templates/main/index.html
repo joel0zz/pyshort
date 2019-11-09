@@ -3,25 +3,21 @@
 {% block nav %}{% include 'nav.html' %}{% endblock %}
 {% block page_content %}
 
-    <div class="col-md-4">
-      <div class="thumbnail">
-        <a href="https://www.dyclassroom.com/image/topic/python/logo.png" target="_blank">
-          <img src="https://www.dyclassroom.com/image/topic/python/logo.png" alt="Nature">
-          <div class="caption">
-          </div>
-        </a>
-      </div>
-    </div>
 <section class="container-fluid text-left py-1 mt-1" id="contact">
-<h2 class="display-4 pb-4 my-2">Enter a URL:</h2>
 <div>
     {% from "_formhelpers.html" import render_field %}
     <form method="POST" role="form">
     {{ form.hidden_tag() }}
-    {{ render_field(form.url, class='form-control') }}
+    {{ render_field(form.url, class='form-control', placeholder='Enter URL') }}
     <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 </section>
+
+        <div class="col-md-4" style="float: right;">
+        <a href="{{ url_for('static', filename='logo.png') }}" target="_blank">
+          <img src="{{ url_for('static', filename='logo.png') }}" alt="Nature">
+        </a>
+    </div>
 
 {% endblock %}
